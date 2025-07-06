@@ -44,10 +44,11 @@ jobs:
         uses: actions/download-artifact@v4 # Download the build artifact from the build job
         with:
           name: build # Name of the artifact
+          path: .
 
       # Example: Deploy to GitHub Pages (replace with your deployment method)
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4  # Use a pre-built action for GitHub Pages deployment
         with:
           branch: gh-pages  # Specify the branch to deploy to (commonly 'gh-pages' for GitHub Pages)
-          folder: build/build  # Specify the folder containing the build files
+          folder: build  # Specify the folder containing the build files
