@@ -8,7 +8,7 @@ on:
       main  # Trigger the workflow on pull requests to the main branch
 
 jobs:
-  build:  # Define a job named 'build'
+  build_and_deploy:  # Define a job named 'build'
     runs-on: macos-latest  # Specify the runner environment (Ubuntu latest)
 
     steps:
@@ -26,29 +26,9 @@ jobs:
       # Optional: Add testing steps here (e.g., unit tests)
       # - name: Run tests
       #   run: npm test
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4  # Upload the build files as an artifact
-        with:
-          name: build  # Name of the artifact
-          path: build  # Path to the build directory
-
-  deploy:  # Define a job named 'deploy'
-    needs: build  # Ensure the deploy job runs after the build job
-    runs-on: macos-latest  # Specify the runner environment
-
-    steps:
-      - uses: actions/checkout@v4  # Checkout the source code again
-
-      - name: Download build artifact
-        uses: actions/download-artifact@v4 # Download the build artifact from the build job
-        with:
-          name: build # Name of the artifact
-          path: .
-
-      # Example: Deploy to GitHub Pages (replace with your deployment method)
+      
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4  # Use a pre-built action for GitHub Pages deployment
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages  # Specify the branch to deploy to (commonly 'gh-pages' for GitHub Pages)
-          folder: build  # Specify the folder containing the build files
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Uses the default GitHub token
+          publish_dir: ./build
