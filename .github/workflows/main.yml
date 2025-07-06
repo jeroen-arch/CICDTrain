@@ -50,4 +50,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4  # Use a pre-built action for GitHub Pages deployment
         with:
           branch: gh-pages  # Specify the branch to deploy to (commonly 'gh-pages' for GitHub Pages)
+          uses: actions/download-artifact@v4
           folder: build  # Specify the folder containing the build files
