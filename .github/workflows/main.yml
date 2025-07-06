@@ -12,6 +12,7 @@ jobs:
     runs-on: macos-latest  # Specify the runner environment (Ubuntu latest)
 
     steps:
+      - uses: actions/checkout@v4  # Checks out the source code repository
       - name: Set up Node.js
         uses: actions/setup-node@v4  # Set up Node.js with a specified version
         with:
